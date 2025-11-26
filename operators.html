@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators</title>
+</head>
+
+<body>
+    <script>
+        //Arithmetic operators +, _, *, /, **, % 
+        var a = 12;
+        var b = 2;
+        var c = "3";
+        var d = a + b;
+        var e = a + c;
+        var f = a - c;
+        document.write(a ** b + " " + a ** c + " " + a / c + " " + a / b + " " + e + " " + f + "<br> ");
+
+    </script>
+
+    <script>
+        //Assignments operators +=, _=, *=, /=, **=, %= 
+        var x = 10;
+        var y = 5;
+        x %= y;
+
+        document.write(x + " ");
+        document.write(y + " ");
+        document.write("<br>");
+    </script>
+
+    <script>
+        //comparison operators <,>,<=,>=,==,!=,===
+
+        var p = 12;
+        var q = "12";
+
+        if (p == q) {
+            document.write("true");
+        }
+        else {
+            document.write("false");
+        }
+        document.write("<br>");
+        if (p === q) {
+            document.write("true");
+        }
+        else {
+            document.write("false");
+        }
+        document.write("<br>");
+    </script>
+
+    <script>
+        //logical operators &&, ||, !
+        var age = 18;
+        if (age < 18) {
+            document.write("child");
+        }
+        if (age >= 18 && age <= 30) {
+            document.write("adult");
+        }
+        document.write("<br>");
+
+        var day="sunday";
+        if (day==="saturday"||day==="sunday") {
+            document.write("weekend");
+        }
+        else{
+            document.write("weekday");
+        }
+        document.write("<br>");
+
+        var k=13;
+        if(k!=13)
+        {
+            document.write("false");
+        }
+        else
+        {
+            document.write("true");
+        }
+         document.write("<br>");
+    </script>
+    
+    <script>
+        //turnery operators
+        var age1=20;
+        let elg=(age1 >=18)? "eligible for vote" : "not eligible for vote";
+        document.write(elg);
+    </script>
+
+</body>
+
+</html>
