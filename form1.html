@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Normal Form - Bootstrap Validation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .error-msg { font-size: 0.9rem; min-height: 1.2rem; }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h3 class="card-title mb-4">Contact / Signup Form</h3>
+
+              <form id="normalForm" onsubmit="return validateForm(event)">
+
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+                  <div id="nameError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                  <div id="emailError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="mobile" class="form-label">Mobile No</label>
+                  <input type="tel" class="form-control" id="mobile" placeholder="10 digit mobile number">
+                  <div id="mobileError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password">
+                  <div id="passwordError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter password">
+                  <div id="confirmPasswordError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message (Feedback)</label>
+                  <textarea class="form-control" id="message" rows="4" placeholder="Write your message..."></textarea>
+                  <div id="messageError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                  <div class="d-flex gap-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                      <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                      <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="others" value="Others">
+                      <label class="form-check-label" for="others">Others</label>
+                    </div>
+                  </div>
+                  <div id="genderError" class="text-danger error-msg"></div>
+                </div>
+
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="agree">
+                  <label class="form-check-label" for="agree">I agree to the terms and conditions</label>
+                  <div id="agreeError" class="text-danger error-msg"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary ms-2" onclick="clearErrors()">Reset</button>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function validateForm(event) {
+        event.preventDefault();
+
+        const nameEl = document.getElementById('name');
+        const emailEl = document.getElementById('email');
+        const mobileEl = document.getElementById('mobile');
+        const passwordEl = document.getElementById('password');
+        const confirmPasswordEl = document.getElementById('confirmPassword');
+        const messageEl = document.getElementById('message');
+        const agreeEl = document.getElementById('agree');
+
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const mobileError = document.getElementById('mobileError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const messageError = document.getElementById('messageError');
+        const agreeError = document.getElementById('agreeError');
+        const genderError = document.getElementById('genderError');
+
+        nameError.innerText = '';
+        emailError.innerText = '';
+        mobileError.innerText = '';
+        passwordError.innerText = '';
+        confirmPasswordError.innerText = '';
+        messageError.innerText = '';
+        agreeError.innerText = '';
+        genderError.innerText = '';
+
+        let valid = true;
+
+        const name = nameEl.value.trim();
+        const nameRegex = /^[A-Za-z ]{2,}$/;
+        if (!nameRegex.test(name)) {
+          nameError.innerText = "Enter a valid name.";
+          valid = false;
+        }
+
+        const email = emailEl.value.trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+        if (!emailRegex.test(email)) {
+          emailError.innerText = "Enter a valid email.";
+          valid = false;
+        }
+
+        const mobile = mobileEl.value.trim();
+        const mobileRegex = /^[0-9]{10}$/;
+        if (!mobileRegex.test(mobile)) {
+          mobileError.innerText = "Enter a valid 10-digit mobile number.";
+          valid = false;
+        }
+
+        const password = passwordEl.value.trim();
+        const passwordRegex = /^.{6,}$/;
+        if (!passwordRegex.test(password)) {
+          passwordError.innerText = "Password must be 6+ characters.";
+          valid = false;
+        }
+
+        const confirmPassword = confirmPasswordEl.value.trim();
+        if (confirmPassword !== password) {
+          confirmPasswordError.innerText = "Passwords do not match.";
+          valid = false;
+        }
+
+        const message = messageEl.value.trim();
+        if (message.length > 500) {
+          messageError.innerText = "Message too long.";
+          valid = false;
+        }
+
+        if (
+          !document.getElementById("male").checked &&
+          !document.getElementById("female").checked &&
+          !document.getElementById("others").checked
+        ) {
+          genderError.innerText = "Select your gender.";
+          valid = false;
+        }
+
+        if (!agreeEl.checked) {
+          agreeError.innerText = "You must agree.";
+          valid = false;
+        }
+
+        if (valid) {
+          alert("Form submitted successfully!");
+          document.getElementById("normalForm").reset();
+        }
+      }
+
+      function clearErrors() {
+        const ids = ['nameError','emailError','mobileError','passwordError','confirmPasswordError','messageError','agreeError','genderError'];
+        ids.forEach(id => document.getElementById(id).innerText = "");
+      }
+    </script>
+  </body>
+</html>
